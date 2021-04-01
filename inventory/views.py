@@ -48,6 +48,9 @@ def edit_product(request, id):
     }
     return render(request, 'edit_item.html', context)
 
+def add_ingredient_page(request):
+    pass
+
 # actions
 
 def add_item_form(request):
@@ -82,7 +85,7 @@ def add_item_form(request):
         price=request.POST['price'],
         description=description,
     )
-    return redirect('/admin')
+    return redirect('/admin/add_ingredients')
 
 def edit_item_form(request):
     errors = Product.objects.product_validator(request.POST)
@@ -112,8 +115,7 @@ def edit_item_form(request):
         else:
             product.description=""
         product.save()
-
-    return redirect('/admin/inventory')
+        return redirect('/admin/inventory')
 
 def delete_item(request, id):
     Product.objects.get(id=id).delete()

@@ -67,7 +67,7 @@ def login(request):
         logged_user = user[0]
         request.session['id']= logged_user.id
         request.session['how']='login'
-        request.session['level']=user.user_level
+        request.session['level']=logged_user.user_level
         return redirect('/dashboard')
     else: 
         print("invalid login")

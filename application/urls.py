@@ -10,5 +10,7 @@ urlpatterns = [
 
     # action
     path('edit_user_info', views.edit_submit),
+    path('add_favorites', views.add_favorite),
+    path('remove/<int:id>', views.remove_favorite),
     
-]
+] 

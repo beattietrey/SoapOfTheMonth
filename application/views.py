@@ -54,3 +54,15 @@ def edit_submit(request):
         user.email=request.POST['email']
         user.save()
         return redirect("/")
+
+def add_favorite(request):
+    user = User.objects.get(id=request.session['id'])
+    user.favorites.add(Product.objects.get(id=request.POST['faves']))
+    user.save()
+    return redirect(f'/dashboard/favorites/{user.id}')
+
+def remove_favorite(request, id):
+    user = User.objects.get(id=request.session['id'])
+    user.favorites.remove(Product.objects.get(id=id))
+    user.save()
+    return redirect(f'/dashboard/favorites/{user.id}')
