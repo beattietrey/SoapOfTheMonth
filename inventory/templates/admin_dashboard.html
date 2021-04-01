@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="container d-flex">
+            <div class="container w-75">
+                <h1>Hi {{admin.first_name}}!</h1>
+            </div>
+            <div class="container w-50 d-flex justify-content-end align-items-center">
+                <a href="/dashboard" class="btn btn-primary btn-sm mr-5">User Profile</a>
+                <a href="/logout" class="btn btn-primary btn-sm">Logout</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col mb-5">
+                    <h3>Inventory</h3>
+                    <a href="/admin/inventory" class="btn btn-primary btn-sm ">Inventory</a>
+                </div>
+                <div class="col mb-5">
+                    <h3>Add Products</h3>
+                    <a href="/admin/add_items" class="btn btn-primary btn-sm">Add Products</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mb-5">
+                    <h3>User Profiles</h3>
+                    <a href="/admin/users" class="btn btn-primary btn-sm disabled">Users</a>
+                </div>
+                <div class="col mb-5">
+                    <h3>Orders</h3>
+                    <a href="/admin/orders" class="btn btn-primary btn-sm disabled">Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

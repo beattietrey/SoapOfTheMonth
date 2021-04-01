@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="container d-flex space-between">
+            <div class="container w-75">
+                <h1>Hi {{user.first_name}}!</h1>
+                <h3>Favorites</h3>
+            </div>
+            <div class="container w-50 d-flex justify-content-end align-items-center">
+                <a href="/" class="btn btn-primary m-1">Home</a>
+                <a href="/dashboard/user_info/{{user.id}}" class=" m-1 btn btn-primary">Edit Profile</a>
+                <a href="/logout" class="btn btn-primary m-1">Logout</a>
+            </div>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <th scope="row">{{product.name}}</th>
+                        <td>{{product.price}}</td>
+                        <td>{{product.description}}</td>
+                        <td>
+                            <a href="/remove/{{product.id}}" class="btn btn-primary">Remove</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            <form action="/dashboard/add_favorites" method="post">
+                {% csrf_token %}
+                <select name="faves">
+                    <option selected disabled>-Add to favorites-</option>
+                    {% for product in inventory %}
+                        {% if product not in user.favorites.all %}
+                        <option value="{{product.id}}">{{product.name}}</option>
+                        {%endif%}
+                    {%endfor%}
+                </select>
+                <button type="submit" class='btn btn-primary'>Add</button>
+            </form>
+
+        </div>
+
+
+    </div>
+</body>

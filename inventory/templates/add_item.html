@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="container w-75">
+            <h1>Hi {{user.first_name}}!</h1>
+        </div>
+        <div class="container w-50 d-flex justify-content-end align-items-center">
+            {% if user.user_level > 0 %}
+            <a href="/admin/" class="btn btn-primary">Admin</a>
+            {%endif%}
+            <a href="/dashboard/user_info/{{user.id}}" class="btn btn-primary">Edit Profile</a>
+            <a href="/logout" class="btn btn-primary">Logout</a>
+        </div>
+        <div class="container">
+            <h4>Name and Price are required</h4>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+        {% endif %}
+            <form action="/admin/add_inventory" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{user.id}}">
+                <input class="d-block" type="text" name="product_name" placeholder="Product Name">
+                <input class="d-block" type="text" name="amount" placeholder="Amount in Inventory - if none given, amount will be set to 0">
+                <input class="d-block" type='text' name="cost_to_make" placeholder="Cost to make - if none given, cost will be set to 0">
+                <input class="d-block" type="text" name="price" placeholder="Sales Price">
+                <textarea class="d-block" name="description" cols="30" rows="5" placeholder="Item Description"></textarea>
+                <button type="submit" class='btn btn-sm btn-primary'>Submit</button>
+            </form>
+            <a href="/admin" class="btn btn-warning btn-sm">Cancel</a>
+        </div>
+    </div>
+</body>

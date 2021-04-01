@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="container d-flex">
+            <div class="container w-75">
+            </div>
+            <div class="container w-50 d-flex justify-content-end align-items-center">
+                {% if user.user_level > 0 %}
+                <a href="/admin/" class="btn btn-primary">Admin</a>
+                {%endif%}
+
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Product Amount in Inventory</th>
+                        <th scope="col">Product Cost to Make</th>
+                        <th scope="col">Product Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in inventory %}
+                    <tr>
+                        <th scope="col">{{product.id}}</th>
+                        <th scope="col">{{product.name}}</th>
+                        <th scope="col">{{product.price}}</th>
+                        <th scope="col">{{product.amount}}</th>
+                        <th scope="col">{{product.cost_to_make}}</th>
+                        <th scope="col">{{product.description}}</th>
+                        <th scope="col"><a href="/admin/inventory/edit/{{product.id}}" class='btn btn-primary btn-sm'>Edit</a></th>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</body>
