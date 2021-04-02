@@ -31,6 +31,7 @@
             <form action="/admin/add_inventory" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{user.id}}">
+                <input type="hidden" name="product_id">
                 <input class="d-block" type="text" name="product_name" placeholder="Product Name">
                 <input class="d-block" type="text" name="amount" placeholder="Amount in Inventory - if none given, amount will be set to 0">
                 <input class="d-block" type='text' name="cost_to_make" placeholder="Cost to make - if none given, cost will be set to 0">

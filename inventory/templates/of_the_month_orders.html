@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container w-50 d-flex justify-content-end align-items-center">
+        {% if admin.user_level > 0 %}
+        <a href="/admin/" class="btn btn-primary">Admin</a>
+        {%endif%}
+        <a href="/logout" class="btn btn-primary">Logout</a>
+    </div> 
+    <div class="container">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Customer ID</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Customer Order</th>
+              </tr>
+            </thead>
+            <tbody>
+            {%for customer in customers %}
+              <tr>
+                <th scope="row">{{customer.id}}</th>
+                <td>{{customer.first_name}} {{customer.last_name}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.order.products.all}}</td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+    </div>
+</body>

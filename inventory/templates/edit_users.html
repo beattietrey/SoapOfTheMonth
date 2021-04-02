@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Users</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container w-50 d-flex justify-content-end align-items-center">
+        {% if admin.user_level > 0 %}
+        <a href="/admin/" class="btn btn-primary">Admin</a>
+        {%endif%}
+        <a href="/logout" class="btn btn-primary">Logout</a>
+    </div>
+    <div class="container">
+        <h3>Edit {{user.first_name}} {{user.last_name}}'s Profile</h3>
+        <form action="/admin/edit_user/{{user.id}}" method="post">
+            {% csrf_token %}
+            <label for="first_name">First Name:</label>
+            <input class="d-block" type="text" name="first_name" value="{{user.first_name}}">
+            <label for="last_name">Last Name:</label>
+            <input class="d-block" type="text" name="last_name" value="{{user.last_name}}">
+            <label for="cost_to_make">Birthday:</label>
+            <input class="d-block" type='date' name="birth_date" value="{{birth_date}}">
+            <label for="email">Email:</label>
+            <input class="d-block" type="text" name="email" value="{{user.email}}">
+            <label for="level">User Level:</label>
+            <input class="d-block" type="text" name="level" value="{{user.user_level}}">              
+            <button type="submit" class='btn btn-sm btn-primary'>Submit</button>
+        </form>
+        <a href="/admin" class="btn btn-warning btn-sm">Cancel</a>
+
+    </div>
+</body>

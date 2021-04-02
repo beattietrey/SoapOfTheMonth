@@ -51,38 +51,12 @@
             </div>
             <div class="col p-5 m-5 border">
                 <h3>User Info</h3>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                <a href="/dashboard/user_info/{{user.id}}" class="btn btn-primary">Edit Profile</a>
+                <div class="container">
+                    <h5>Name:</h5> <span>{{user.first_name}} {{user.last_name}}</span>
+                    <h5>Birthday:</h5> <span>{{user.birth_date}}</span>
+                    <h5>Email:</h5> <span>{{user.email}}</span>
+                </div>
+                <a href="/dashboard/user_info/{{user.id}}" class="mt-3 btn btn-primary">Edit Profile</a>
             </div>
         </div>
         <div class="row">
@@ -123,38 +97,12 @@
             </div>
             <div class="col p-5 m-5 border">
                 <h3>Allergies</h3>
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                
-                <a href="/dashboard/allergies/{{user.id}}" class="btn btn-primary disabled">Edit Allergies</a>
+                    <ul>
+                        {%for allergy in user.allergies.all %}
+                        <li>{{allergy.name}}</li>
+                        {%endfor%}
+                    </ul>
+                <a href="/dashboard/allergies" class="btn btn-primary">Edit Allergies</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container w-50 d-flex justify-content-end align-items-center">
+        {% if admin.user_level > 0 %}
+        <a href="/admin/" class="btn btn-primary">Admin</a>
+        {%endif%}
+        <a href="/dashboard/user_info/{{user.id}}" class="btn btn-primary">Edit Profile</a>
+        <a href="/logout" class="btn btn-primary">Logout</a>
+    </div>
+    <div class="container">
+        <h3>User Profiles</h3>
+        <div class="input-group">
+            <div class="form-outline d-flex">
+            <form action="/admin/users/search" method="post">
+                <input type="search" id="form1" class="form-control" />
+                <button type="submit" disabled class="btn btn-primary btn-sm">Search</button></form>
+                </div>
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Order</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for each in order %}
+              <tr>
+                <th scope="row">{{each.user.id}}</th>
+                <td><a href="/admin/users/edit/{{each.user.id}}">{{each.user.first_name}} {{each.user.last_name}}</a></td>
+                <td>{{each.user.email}}</td>
+                <td>
+                    {%for product in each.products.all %}
+                    <p>{{product.name}}</p>
+                    {%endfor%}
+                </td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+    </div>
+</body>

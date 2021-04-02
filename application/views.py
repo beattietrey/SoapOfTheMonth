@@ -36,10 +36,28 @@ def favorites(request, id):
         }
     return render(request, 'favorites.html', context)
 
+def allergies(request):
+    if 'id' not in request.session:
+        return redirect('/')
+    else:
+        user=User.objects.get(id=request.session['id'])
+        context={
+            'user': user,
+            'products': user.favorites.all(),
+            'ingredients': Ingredient.objects.all(),
+        }
+    return render(request, 'allergies.html', context)
 
 
-
-
+def new_order(request):
+    if 'id' not in request.session:
+        return redirect('/')
+    else:
+        context={
+            'user':User.objects.get(id=request.session['id']),
+            'products': Product.objects.all()
+        }
+        return render(request,'new_order.html', context)
 
 
 # action
@@ -66,3 +84,15 @@ def remove_favorite(request, id):
     user.favorites.remove(Product.objects.get(id=id))
     user.save()
     return redirect(f'/dashboard/favorites/{user.id}')
+
+def update_allergy(request):
+    user = User.objects.get(id=request.session['id'])
+    user.allergies.add(Ingredient.objects.get(id=request.POST['allergy']))
+    user.save()
+    return redirect('/dashboard/allergies')
+
+def remove_allergy(request, id):
+    user = User.objects.get(id=request.session['id'])
+    user.allergies.remove(Ingredient.objects.get(id=id))
+    user.save()
+    return redirect('/dashboard/allergies')

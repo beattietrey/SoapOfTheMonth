@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container w-50 d-flex justify-content-end align-items-center">
+        {% if admin.user_level > 0 %}
+        <a href="/admin/" class="btn btn-primary">Admin</a>
+        {%endif%}
+        <a href="/logout" class="btn btn-primary">Logout</a>
+    </div>    
+    <div class="container">
+        <a href="/dashboard/new_order" class="btn btn-primary" disabled>New Order</a>
+        <a href="/admin/soap_of_the_month" class="btn btn-primary">New Soap of the Month</a>
+        <a href="/admin/soap_of_the_month"></a>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Order #</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Order Contents</th>
+                <th scope="col">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for order in orders reversed %}
+              <tr>
+                <th scope="row">{{order.id}}</th>
+                <td>{{order.user.first_name}} {{order.user.last_name}}</td>
+                <td>{{user.products.all}}</td>
+                <td>{{order.created_at}}</td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+
+    </div>
+</body>

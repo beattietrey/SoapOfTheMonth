@@ -40,6 +40,20 @@
                 <input class="d-block" type="text" name="price" value="{{product.price}}">
                 <label for="description">Description:</label>
                 <textarea class="d-block" name="description" cols="30" rows="5" value="{{product.description}}">{{product.description}}</textarea>
+                <h4>Ingredients in {{product.name}}</h4>
+                {%for ingredient in ingredients %}
+                {%if ingredient in product.ingredients.all %}
+                <label for="{{ingredient.name}}">{{ingredient.name}}</label>
+                <input type="checkbox" checked name="ingredients" value="{{ingredient.id}}">
+                {%endif%}
+                {%endfor%}
+                <h4>Add Ingredients</h4>
+                {%for ingredient in ingredients%}
+                {%if ingredient not in product.ingredients.all %}
+                <label for="{{ingredient.name}}">{{ingredient.name}}</label>
+                <input type="checkbox" name="ingredients" value="{{ingredient.id}}">
+                {%endif%}
+                {%endfor%}
                 <button type="submit" class='btn btn-sm btn-primary'>Submit</button>
             </form>
             <a href="/admin/inventory" class="btn btn-warning btn-sm">Cancel</a>

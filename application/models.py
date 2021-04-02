@@ -10,16 +10,14 @@ class ProductManager(models.Manager):
         
         if len(postData['product_name']) < 1:
             errors['product_name'] = 'Product must have a name'
+        elif len(Product.objects.filter(name=postData['product_name'])) > 0:
+            errors['product_name'] = 'Product is already in Inventory'
         if len(postData['price'])  < 1:
             errors['price'] = 'Price must be set'
         if user.user_level != 5:
             errors['admin'] = 'Invalid Admin Access'
         return errors
 
-class Allergy(models.Model):
-    name=models.CharField(max_length=45)
-    serverity= models.TextField()
-    users = models.ManyToManyField(User, related_name='allergies')
 
 class Product(models.Model):
     name=models.CharField(max_length=255)
@@ -35,3 +33,4 @@ class Product(models.Model):
 class Ingredient(models.Model):
     name=models.CharField(max_length=45)
     products=models.ManyToManyField(Product, related_name='ingredients')
+    users = models.ManyToManyField(User, related_name='allergies')
